@@ -1,0 +1,197 @@
+/* ===== Base ===== */
+* {
+  font-family: Poppins, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center; /* horizontal center */
+  align-items: center;     /* vertical center */
+  flex-direction: column;
+  background: linear-gradient(135deg, #fbc2eb, #a6c1ee); /* your gradient */
+  font-family: Poppins, sans-serif;
+  overflow-x: hidden;
+}
+
+
+/* ===== Card (panda + intro) ===== */
+.card {
+  background: white;
+  padding: 40px;
+  border-radius: 24px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+  width: 90%;
+  max-width: 600px;
+}
+
+h1#typeText {
+  font-size: 26px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.panda {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+/* ===== Buttons ===== */
+button {
+  padding: 14px 26px;
+  border-radius: 30px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* YES button initially next to NO button */
+#yesBtn {
+  background: #ff4d6d;
+  color: white;
+  position: relative; /* natural layout start */
+  margin-left: 20px;
+  transition: left 0.5s ease, top 0.5s ease;
+}
+
+/* NO button below panda, static flow */
+#noBtn {
+  background: #38b000;
+  color: white;
+  margin-top: 20px;
+}
+
+#birthdayMessage {
+  font-family: 'Dancing Script', cursive;
+  font-size: 3rem; /* Make it larger */
+  text-align: center; /* Center align */
+  margin-top: 20px; /* Add some spacing from the poem */
+  color: #ff4081; /* You can choose any color you like */
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+/* ===== Split layout ===== */
+.split-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Gallery column (left side with images) */
+.gallery-column {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden; /* Hide the overflow */
+  position: relative;
+  padding-top: 40px; /* Adjust to center images */
+  height: 100vh; /* Full screen height */
+  width: 50%; /* Ensure that it takes 50% width on large screens */
+}
+
+/* Gallery inner for vertical scrolling */
+.gallery-inner {
+  display: flex;
+  flex-wrap: wrap; /* Ensures the images are placed in a row */
+  animation: scrollGallery 30s linear infinite; /* smooth infinite scroll */
+  height: auto;
+  overflow: hidden;  /* Prevents overflow */
+  justify-content: center;
+}
+
+/* Smooth scrolling effect */
+@keyframes scrollGallery {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%); /* Moves images up */
+  }
+}
+
+/* Image styling */
+.gallery-column img {
+  width: 30%; /* Make the image width responsive, 3 per row */
+  margin: 10px;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  object-fit: cover; /* Ensures that images fit inside without distortion */
+}
+
+.gallery-column img:hover {
+  transform: scale(1.12) rotate(0deg);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  z-index: 5;
+}
+
+/* ===== Poem Styles ===== */
+.poem-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 40px;
+  color: #ffffff; /* White text */
+}
+
+.poem-column p {
+  font-family: 'Dancing Script', cursive; /* Using a cursive font for the poem */
+  font-size: 1.5rem; /* Slightly larger font size */
+  line-height: 1.8; /* Increased line height for better readability */
+  color: #fff; /* White text color */
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); /* Subtle text shadow for better contrast */
+  max-width: 90%;
+  margin-bottom: 15px;
+  padding: 10px; /* Adding padding for spacing */
+  text-align: left; /* Align text to the left */
+  background: rgba(0, 0, 0, 0.4); /* Dark background behind text for readability */
+  border-radius: 8px; /* Optional rounded corners */
+}
+
+
+/* Responsive Styles for Tablets and Large Phones */
+@media (max-width: 900px) {
+  .gallery-column {
+    column-count: 2; /* Show 2 images per row on tablets */
+  }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 500px) {
+  .split-container {
+    flex-direction: column; /* stack on mobile */
+  }
+
+  .gallery-column {
+    column-count: 3;
+    padding: 10px;
+    height: auto;
+  }
+
+  .poem-column {
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 500px) {
+  .gallery-column {
+    column-count: 1; /* 1 column on phones */
+  }
+
+  .poem-column p {
+    font-size: 1.2rem;
+    max-width: 90%;
+  }
+}

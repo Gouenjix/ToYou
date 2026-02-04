@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday! 💖</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+  <div class="split-container">
+    <!-- Left: Gallery -->
+    <div class="gallery-column" id="gallery">
+      <div class="gallery-inner" id="galleryInner"></div>
+    </div>
+
+    <!-- Right: Poem -->
+    <div class="poem-column">
+        <div id="birthdayMessage"></div> <!-- Happy Birthday message at the top -->
+        <br> 
+      <p id="poemText"></p>
+    </div>
+  </div>
+
+<script>
+// ---------------- POEM ----------------
+const poemLines = [
+  "Within you, I've found a friend so true,",
+  "Someone who’s seen me at my best and worst, too.",
+  "Not just in moments of laughter and light,",
+  "But through the shadows, you've stayed in my sight.",
+
+  "Still as the stars in a quiet night sky,",
+  "Still as the bond that won’t ask why.",
+  "Still as the memories we’ve both shared,",
+  "Still as the trust that’s always been there.",
+
+  "Within you, I’ve found a friend who stays,",
+  "Through all my faults, in all my ways.",
+  "I know I've hurt you, made you feel small,",
+  "But you’ve never turned away through it all.",
+
+  "I’m sorry for every time I let you down,",
+  "For every fight, for making you frown.",
+  "For the times I made you feel unseen,",
+  "And all the ways I wasn’t what you needed me to be.",
+
+  "But through all that, you’ve still been here,",
+  "A constant in a world so unclear.",
+  "Thank you for sticking around, for staying near,",
+  "For loving me even when I gave you reason to fear.",
+
+  "So, on your birthday, I want you to know,",
+  "I’m thankful for you more than words can show.",
+  "Through thick and thin, you’ve been my friend,",
+  "And I hope this bond will never end."
+];
+
+
+
+// Typewriter effect for poem
+const poemText = document.getElementById("poemText");
+let lineIndex = 0;
+
+// Show Happy Birthday message at the top
+function showBirthdayMessage() {
+  let birthdayMessage = document.getElementById("birthdayMessage");
+  birthdayMessage.innerHTML = "🎉 Happy Birthday Maate...🎉"; // Show the message
+}
+
+// Call showBirthdayMessage immediately
+showBirthdayMessage();
+
+async function showLine() {
+  if (lineIndex < poemLines.length) {
+    let line = poemLines[lineIndex];
+    let charIndex = 0;
+    function typeChar() {
+      if (charIndex < line.length) {
+        poemText.innerHTML += line[charIndex];
+        charIndex++;
+        setTimeout(typeChar, 35);
+      } else {
+        poemText.innerHTML += "<br>";
+        lineIndex++;
+        setTimeout(showLine, 500);
+      }
+    }
+    typeChar();
+  }
+}
+
+showLine();
+
+
+// ---------------- GALLERY ----------------
+const gallery = document.getElementById("galleryInner");
+const galleryInner = document.createElement('div');
+galleryInner.classList.add('gallery-inner');
+gallery.appendChild(galleryInner);
+
+const totalPhotos = 12; // change to your actual number of photos
+
+// Create images and append them to gallery
+for (let n = 1; n <= totalPhotos; n++) {
+  const img = document.createElement("img");
+  img.src = `photos/photo${n}.jpg`;  // Ensure your images are in the 'photos' folder
+  img.alt = `Photo ${n}`;
+  img.classList.add("gallery-img");
+
+  // Slight random rotation -5° to +5°
+  const angle = Math.random() * 10 - 5;
+  img.style.transform = `rotate(${angle}deg)`;
+  img.dataset.angle = angle;
+
+  // Hover effect for desktop
+  img.addEventListener("mouseenter", () => {
+    img.style.transform = `rotate(0deg) scale(1.12)`;
+  });
+  img.addEventListener("mouseleave", () => {
+    img.style.transform = `rotate(${angle}deg) scale(1)`;
+  });
+
+  // Append image to the gallery
+  gallery.appendChild(img);
+}
+
+// Duplicate the content multiple times to make the scroll infinite
+const duplicateGallery = () => {
+  for (let i = 0; i < 3; i++) { // Duplicate 3 times (you can change this value)
+    galleryInner.innerHTML += galleryInner.innerHTML;
+  }
+};
+
+</script>
+
+</body>
+</html>
